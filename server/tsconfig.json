@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    // Directorios de entrada y salida (para mantener el orden)
+    "rootDir": "./",
+    "outDir": "./dist",
+
+    // Configuración para Node.js (Backend estándar)
+    "module": "commonjs",            // El estándar que Node entiende nativamente
+    "moduleResolution": "node",      // Para encontrar los paquetes en node_modules
+    "target": "es2016",              // Una versión de JS segura y estable
+    
+    // Interoperabilidad (CRUCIAL para Express)
+    "esModuleInterop": true,         // Permite: import express from 'express'
+    "allowSyntheticDefaultImports": true,
+
+    // Opciones estrictas (Buenas para tu código)
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "skipLibCheck": true,            // Ignora errores en archivos de definición (.d.ts) ajenos
+    "forceConsistentCasingInFileNames": true,
+
+    // Desactivamos lo que te daba error
+    "verbatimModuleSyntax": false,   // <--- ESTO arregla tu error de imports
+    "jsx": "preserve"                // No necesario en backend, pero si hay algo residual lo ignora
+  },
+  "include": ["."],
+  "exclude": ["node_modules", "dist"]
+}
