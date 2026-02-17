@@ -1,3 +1,280 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ============================================
+   SQUAD UP - DESIGN SYSTEM
+   Basado en el diseño de Figma oficial
+   ============================================ */
+
+/* ===== DESIGN TOKENS ===== */
+:root {
+  /* Colores principales */
+  --color-bg-primary: #121218;
+  --color-bg-surface: #1e1e26;
+  --color-bg-surface-hover: rgba(18, 18, 24, 0.5);
+
+  /* Color de marca */
+  --color-brand: #6c5ce7;
+  --color-brand-hover: rgba(108, 92, 231, 0.8);
+
+  /* Texto */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #b2bec3;
+  --color-text-muted: #636e72;
+
+  /* Bordes */
+  --color-border: #5c5a5a;
+  --color-border-light: #2d2d3a;
+
+  /* Estados */
+  --color-error: #e74c3c;
+  --color-success: #27ae60;
+
+  /* Placeholder/Empty */
+  --color-placeholder: #d9d9d9;
+
+  /* ===== ESPACIADO ===== */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-2xl: 32px;
+
+  /* ===== BORDES ===== */
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 32px;
+  --radius-full: 500px;
+
+  /* ===== TIPOGRAFÍA ===== */
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-xs: 12px;
+  --font-size-sm: 14px;
+  --font-size-base: 16px;
+  --font-size-lg: 20px;
+  --font-size-xl: 24px;
+  --font-size-2xl: 26px;
+
+  /* ===== SOMBRAS ===== */
+  --shadow-card: 0px 4px 10px 0px rgba(0, 0, 0, 0.25);
+  --shadow-hover: 0px 8px 20px 0px rgba(0, 0, 0, 0.3);
+
+  /* ===== TAMAÑOS DE COMPONENTES ===== */
+  --icon-sm: 16px;
+  --icon-md: 20px;
+  --icon-lg: 24px;
+
+  --avatar-sm: 32px;
+  --avatar-md: 48px;
+  --avatar-lg: 64px;
+  --avatar-xl: 75px;
+
+  --navbar-height: 80px;
+  --sidebar-width: 250px;
+  --chat-panel-width: 264px;
+}
+
+/* ===== RESET Y BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border-light);
+  border-radius: var(--radius-sm);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand);
+}
+
+/* ===== SELECCIÓN ===== */
+::selection {
+  background-color: var(--color-brand);
+  color: white;
+}
+
+/* ===== FOCUS ===== */
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+/* ===== COMPONENTES BASE ===== */
+
+/* Surface/Card */
+.surface {
+  background-color: var(--color-bg-surface);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-card);
+}
+
+/* Botón Primario */
+.btn-primary {
+  background-color: var(--color-brand);
+  color: var(--color-text-primary);
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.btn-primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Botón Secundario */
+.btn-secondary {
+  background-color: transparent;
+  color: var(--color-text-primary);
+  padding: var(--space-md) var(--space-xl);
+  border-radius: var(--radius-sm);
+  font-weight: 500;
+  font-size: var(--font-size-sm);
+  border: 1px solid var(--color-border-light);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-brand);
+  background-color: rgba(108, 92, 231, 0.1);
+}
+
+/* Input */
+.input {
+  width: 100%;
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-base);
+  transition: border-color 0.2s ease;
+}
+
+.input:focus {
+  border-color: var(--color-brand);
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--color-text-muted);
+}
+
+/* Icono base */
+.icon {
+  width: var(--icon-lg);
+  height: var(--icon-lg);
+  flex-shrink: 0;
+}
+
+.icon-sm {
+  width: var(--icon-sm);
+  height: var(--icon-sm);
+}
+
+.icon-md {
+  width: var(--icon-md);
+  height: var(--icon-md);
+}
+
+/* Avatar */
+.avatar {
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+.avatar-sm { width: var(--avatar-sm); height: var(--avatar-sm); }
+.avatar-md { width: var(--avatar-md); height: var(--avatar-md); }
+.avatar-lg { width: var(--avatar-lg); height: var(--avatar-lg); }
+.avatar-xl { width: var(--avatar-xl); height: var(--avatar-xl); }
+
+/* Input autofill */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-text-primary);
+  -webkit-box-shadow: 0 0 0px 1000px var(--color-bg-primary) inset;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  :root {
+    --navbar-height: 64px;
+    --sidebar-width: 100%;
+    --chat-panel-width: 100%;
+  }
+}
