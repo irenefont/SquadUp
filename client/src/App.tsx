@@ -1,3 +1,5 @@
+import  supabase  from './utils/supabase'
+
 function App() {
   return (
     <div className="bg-gray-900 h-screen text-white flex justify-center items-center">
