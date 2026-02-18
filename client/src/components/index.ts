@@ -14,5 +14,8 @@ export * from './forms'
 // Componentes de salas
 export * from './rooms'
 
+// Componentes de chat
+export * from './chat'
+
 // Componentes comunes
 export * from './common'

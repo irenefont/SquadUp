@@ -4,4 +4,3 @@
 
 export * from './Navbar'
 export * from './GameSidebar'
-export * from './ChatPanel'

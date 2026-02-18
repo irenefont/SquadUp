@@ -72,6 +72,9 @@ export default function AuthPage() {
         return
       }
 
+      // TODO: Redireccionar a la pantalla principal después de registrarse correctamente
+      // TODO: Revisar si al validar el email de Supabase se puede mostrar un mensaje indicando que se envió un email de confirmación
+      // TODO: Revisar si después de haber validado el email se puede redireccionar automáticamente a la pantalla principal sin necesidad de que el usuario vuelva a iniciar sesión
       const result = await signUpWithEmail(email, password, {
         username: username.trim(),
         display_name: displayName.trim() || username.trim(),
@@ -82,6 +85,7 @@ export default function AuthPage() {
         setLoading(false)
       }
     } else {
+      // TODO: Redireccionar a la pantalla principal después de iniciar sesión
       const result = await signInWithEmail(email, password)
       if (!result.success) {
         setError(result.error || 'Error al iniciar sesión')
@@ -184,6 +188,8 @@ export default function AuthPage() {
     </div>
   )
 }
+
+// TODO: Extraer los subcomponentes a archivos separados para mejorar la legibilidad y mantenibilidad
 
 // ============================================
 // SUBCOMPONENTES

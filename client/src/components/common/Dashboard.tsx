@@ -5,7 +5,8 @@
 
 import { useState } from 'react'
 import type { User } from '@supabase/supabase-js'
-import { Navbar, GameSidebar, ChatPanel } from '../layout'
+import { Navbar, GameSidebar } from '../layout'
+import { ChatPanel } from '../chat'
 import { RoomsList, RoomView } from '../rooms'
 import type { Room } from '../../data/mockData'
 
@@ -86,7 +87,7 @@ export function Dashboard({ user, onLogout }: DashboardProps) {
           }}
           className="hidden xl:flex"
         >
-          <ChatPanel />
+          <ChatPanel user={user} />
         </aside>
       </div>
     </div>

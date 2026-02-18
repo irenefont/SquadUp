@@ -55,7 +55,8 @@ export async function signUpWithEmail(
   if (error) {
     return { success: false, error: error.message }
   }
-
+// NOTA: Supabase envía un email de confirmación. El usuario debe validar su email antes de poder iniciar sesión.
+// TODO: Arreglar los errores de TypeScript
   return { success: true, user: data.user, session: data.session }
 }
 
