@@ -3,110 +3,58 @@
  * Barra de navegación principal - Fiel al Figma
  */
 
-import { SearchIcon, BellIcon, LogOutIcon } from '../ui/Icons'
+import { SearchIcon, BellIcon, LogOutIcon, SquadUpLogo, PlusIcon } from '../ui/Icons'
 import { Avatar } from '../ui/Avatar'
 import type { User } from '@supabase/supabase-js'
 
 interface NavbarProps {
   user: User
   onLogout: () => void
+  onCreateRoom: () => void
 }
 
-export function Navbar({ user, onLogout }: NavbarProps) {
+export function Navbar({ user, onLogout, onCreateRoom }: NavbarProps) {
   return (
-    <header
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 24,
-        height: 80,
-        width: '100%',
-        padding: '12px 24px',
-        backgroundColor: '#1e1e26',
-        borderRadius: 12,
-        boxShadow: '0px 4px 10px 0px rgba(0, 0, 0, 0.25)',
-        opacity: 0.8,
-      }}
-    >
+    <header className="flex items-center gap-6 h-20 w-full px-6 py-3 bg-[#1e1e26] rounded-xl shadow-[0px_4px_10px_0px_rgba(0,0,0,0.25)] opacity-80">
       {/* Logo - 64x64 */}
-      <div
-        style={{
-          width: 64,
-          height: 64,
-          backgroundColor: '#6c5ce7',
-          borderRadius: 12,
-          opacity: 0.8,
-          flexShrink: 0,
-        }}
-      />
+      <div className="w-16 h-16 shrink-0 flex items-center justify-center">
+        <SquadUpLogo size={56} className="text-[#6c5ce7]" />
+      </div>
 
       {/* SearchBar */}
-      <div
-        style={{
-          flex: 1,
-          display: 'flex',
-          alignItems: 'center',
-          gap: 12,
-          height: '100%',
-          backgroundColor: '#121218',
-          borderRadius: 79,
-          padding: '10px',
-        }}
-      >
-        <SearchIcon size={24} style={{ color: 'white', flexShrink: 0 }} />
-        <span
-          style={{
-            color: 'white',
-            fontSize: 16,
-            fontFamily: 'Inter, sans-serif',
-          }}
-        >
-          Buscar...
+      <div className="flex-1 flex items-center gap-3 h-full bg-[#121218] rounded-full p-2.5 hover:bg-[#121218]/80 transition-colors cursor-pointer">
+        <SearchIcon size={24} className="text-white shrink-0" />
+        <span className="text-white text-base">
+          Buscar salas...
         </span>
       </div>
 
-      {/* Bell Icon - 24x24 */}
+      {/* Botón Crear Sala */}
       <button
-        style={{
-          background: 'none',
-          border: 'none',
-          cursor: 'pointer',
-          padding: 0,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-        }}
+        onClick={onCreateRoom}
+        className="flex items-center gap-2 px-4 py-2 bg-[#6c5ce7] hover:bg-[rgba(108,92,231,0.8)] text-white font-semibold text-sm rounded-xl transition-all duration-200 hover:scale-105"
       >
-        <BellIcon size={24} style={{ color: 'white' }} />
+        <PlusIcon size={18} />
+        <span className="hidden sm:inline">Crear sala</span>
       </button>
 
-      {/* Avatar - 48x48 */}
+      {/* Bell Icon */}
+      <button className="p-0 flex items-center justify-center hover:opacity-70 transition-opacity">
+        <BellIcon size={24} className="text-white" />
+      </button>
+
+      {/* Avatar */}
       <Avatar
         initials={user.email?.charAt(0).toUpperCase()}
         alt={user.email || 'Usuario'}
         size="md"
-        style={{
-          backgroundColor: 'rgba(217, 212, 255, 0.75)',
-          opacity: 0.8,
-        }}
+        className="bg-[#d9d9d9]/75 opacity-80"
       />
 
       {/* Logout button */}
       <button
         onClick={onLogout}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: 8,
-          background: 'none',
-          border: 'none',
-          color: 'var(--color-text-secondary)',
-          cursor: 'pointer',
-          fontSize: 14,
-          padding: '8px 12px',
-          borderRadius: 8,
-          flexShrink: 0,
-        }}
+        className="flex items-center gap-2 text-[#b2bec3] hover:text-white cursor-pointer text-sm px-3 py-2 rounded-lg transition-colors shrink-0"
       >
         <LogOutIcon size={16} />
         <span className="hidden sm:inline">Salir</span>

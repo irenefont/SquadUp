@@ -3,8 +3,7 @@
  * Botón reutilizable con variantes primary y secondary
  */
 
-// TODO: Arreglar estos imports. Leer el error del IDE.
-import { ButtonHTMLAttributes, ReactNode } from 'react'
+import type { ButtonHTMLAttributes, ReactNode } from 'react'
 import { LoaderIcon } from './Icons'
 
 type ButtonVariant = 'primary' | 'secondary'

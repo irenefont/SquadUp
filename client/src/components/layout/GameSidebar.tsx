@@ -12,40 +12,27 @@ interface GameCardProps {
 function GameCard({ game }: GameCardProps) {
   return (
     <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        gap: 16,
-        height: 100,
-        padding: 12,
-        backgroundColor: 'rgba(18, 18, 24, 0.5)',
-        borderLeft: '8px solid #6c5ce7',
-        borderRadius: '0 12px 12px 0',
-        cursor: 'pointer',
-        transition: 'background-color 0.2s',
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.backgroundColor = 'rgba(18, 18, 24, 0.8)'
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.backgroundColor = 'rgba(18, 18, 24, 0.5)'
-      }}
-    >
+      className='flex justify-start items-center w-full h-20 p-3 bg-[#121218]/50 hover:bg-[#121218]/80 border-l-8 border-[#6c5ce7] rounded-r-xl cursor-pointer transition-colors duration-200'
+	>
       {/* Imagen del juego - 64x64 */}
       <div
         style={{
           width: 64,
           height: 64,
           borderRadius: 12,
-          backgroundColor: '#d9d9d9',
+          backgroundColor: 'transparent',
           flexShrink: 0,
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          padding: 4,
           fontSize: 24,
-        }}
+          margin: 8,
+        }}  
       >
-        🎮
+        {game.image ? (<img src={game.image} alt={game.name} style={{ width: '100%', height: '100%' }} />) : (
+          game.name[0]
+        )}
       </div>
       {/* Nombre del juego */}
       <span

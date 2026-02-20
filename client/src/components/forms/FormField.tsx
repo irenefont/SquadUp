@@ -3,7 +3,7 @@
  * Campo de formulario con label e icono
  */
 
-import { ReactNode } from 'react'
+import type { ReactNode } from 'react'
 
 interface FormFieldProps {
   label: string

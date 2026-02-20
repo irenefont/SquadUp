@@ -1,32 +1,57 @@
 /**
  * SQUAD UP - Datos de ejemplo
- * Videojuegos y salas de prueba para desarrollo
+ * Videojuegos y datos de referencia para desarrollo
  */
 
 export interface Game {
-  id: number
+  id: string
   name: string
   image: string | null
 }
 
 export interface Room {
-  id: number
+  id: string
   title: string
+  game: string
+  description: string
+  maxPlayers: number
+  rank: string
+  roles: string[]
   host: string
-  gameId?: number
+  hostEmail: string
+  createdAt: Date
 }
 
-export const GAMES: Game[] = [
-  { id: 1, name: 'League of Legends', image: null },
-  { id: 2, name: 'Valorant', image: null },
-  { id: 3, name: 'World of Warcraft', image: null },
-  { id: 4, name: 'Apex Legends', image: null },
+export const GAMES = [
+  { id: 'lol', name: 'League of Legends', image: '/lol_logo.png' },
+  { id: 'valorant', name: 'Valorant', image: '/valorant_logo.png' },
+  { id: 'wow', name: 'World of Warcraft', image: '/wow_logo.png' },
+  { id: 'apex', name: 'Apex Legends', image: '/apex_logo.png' },
 ]
 
-export const ROOMS: Room[] = [
-  { id: 1, title: 'BUSCO SUPPORT - Platino', host: 'Player1', gameId: 1 },
-  { id: 2, title: 'Ranked Duo - Gold II', host: 'Player2', gameId: 1 },
-  { id: 3, title: 'Busco ADC para ranked', host: 'Player3', gameId: 1 },
-  { id: 4, title: 'Normal casual - Divertirse', host: 'Player4', gameId: 2 },
-  { id: 5, title: 'Practicar en bot game', host: 'Player5', gameId: 1 },
+// Rangos comunes para juegos competitivos
+export const RANKS = [
+  'Sin rango',
+  'Hierro',
+  'Bronce',
+  'Plata',
+  'Oro',
+  'Platino',
+  'Diamante',
+  'Master',
+  'Grandmaster',
+  'Challenger',
+]
+
+// Roles comunes
+export const ROLES = [
+  'Top',
+  'Jungle',
+  'Mid',
+  'ADC',
+  'Support',
+  'Tank',
+  'DPS',
+  'Healer',
+  'Flex',
 ]

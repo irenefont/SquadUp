@@ -3,7 +3,7 @@
  * Campo de entrada con soporte para iconos
  */
 
-import { InputHTMLAttributes, ReactNode } from 'react'
+import type { InputHTMLAttributes, ReactNode } from 'react'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   icon?: ReactNode

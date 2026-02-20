@@ -110,7 +110,7 @@ io.on("connection", (socket) => {
   console.log("Cliente conectado:", socket.id);
 
   /**
-   * RECIBIR Y REENVIAR MENSAJES
+   * RECIBIR Y REENVIAR MENSAJES (CHAT GLOBAL)
    *
    * Flujo:
    * 1. Cliente A envía: socket.emit('message', datos)
@@ -121,12 +121,30 @@ io.on("connection", (socket) => {
    * Usamos io.emit() para que TODOS los clientes reciban el mensaje,
    * incluyendo al que lo envió.
    */
+  
+  // ===== CHAT GLOBAL =====
   socket.on("message", (message) => {
     console.log("Mensaje recibido:", message);
 
     // Reenviar el mensaje a TODOS los clientes conectados
     io.emit("message", message);
   });
+
+  // ===== CHAT DE SALA =====
+  socket.on("join-room", (roomId) => {
+      socket.join(roomId)
+      console.log(`Cliente ${socket.id} se unió a la sala ${roomId}`);
+  });
+
+  socket.on("room-message", ({ roomId, message }) => {
+      console.log(`Mensaje recibido en sala ${roomId}:`, message);
+      io.to(roomId).emit("room-message", message)
+  });
+
+  socket.on("leave-room", (roomId) => {
+      socket.leave(roomId)
+      console.log(`Cliente ${socket.id} dejó la sala ${roomId}`);
+    })
 });
 
 const PORT = process.env.PORT || 3001;

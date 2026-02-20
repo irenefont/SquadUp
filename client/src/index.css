@@ -1,6 +1,4 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
 /* ============================================
    SQUAD UP - DESIGN SYSTEM
@@ -76,13 +74,7 @@
   --chat-panel-width: 264px;
 }
 
-/* ===== RESET Y BASE ===== */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
+/* ===== BASE ===== */
 html {
   scroll-behavior: smooth;
 }
@@ -94,6 +86,18 @@ body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selección de texto */
+::selection {
+  background-color: var(--color-brand);
+  color: white;
+}
+
+/* Focus visible para accesibilidad */
+:focus-visible {
+  outline: 2px solid var(--color-brand);
+  outline-offset: 2px;
 }
 
 /* ===== SCROLLBAR ===== */
@@ -115,44 +119,13 @@ body {
   background: var(--color-brand);
 }
 
-/* ===== SELECCIÓN ===== */
-::selection {
-  background-color: var(--color-brand);
-  color: white;
-}
-
-/* ===== FOCUS ===== */
-:focus-visible {
-  outline: 2px solid var(--color-brand);
-  outline-offset: 2px;
-}
-
-/* ===== ANIMACIONES ===== */
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.3s ease-out forwards;
-}
-
-.animate-pulse {
-  animation: pulse 2s ease-in-out infinite;
-}
-
-.animate-spin {
-  animation: spin 1s linear infinite;
+/* Input autofill */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--color-text-primary);
+  -webkit-box-shadow: 0 0 0px 1000px var(--color-bg-primary) inset;
+  transition: background-color 5000s ease-in-out 0s;
 }
 
 /* ===== COMPONENTES BASE ===== */
@@ -261,20 +234,55 @@ body {
 .avatar-lg { width: var(--avatar-lg); height: var(--avatar-lg); }
 .avatar-xl { width: var(--avatar-xl); height: var(--avatar-xl); }
 
-/* Input autofill */
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus {
-  -webkit-text-fill-color: var(--color-text-primary);
-  -webkit-box-shadow: 0 0 0px 1000px var(--color-bg-primary) inset;
-  transition: background-color 5000s ease-in-out 0s;
+/* ===== RESPONSIVE ===== */
+.auth-left-panel {
+  display: flex;
 }
 
-/* ===== RESPONSIVE ===== */
+.auth-mobile-logo {
+  display: none;
+}
+
 @media (max-width: 768px) {
   :root {
     --navbar-height: 64px;
     --sidebar-width: 100%;
     --chat-panel-width: 100%;
   }
+
+  .auth-left-panel {
+    display: none;
+  }
+
+  .auth-mobile-logo {
+    display: block;
+  }
+}
+
+/* ===== ANIMACIONES ===== */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
 }

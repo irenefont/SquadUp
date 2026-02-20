@@ -7,7 +7,6 @@ import { useState, useEffect } from 'react'
 import { getUser, onAuthStateChange, signOut } from './services/auth.service'
 import type { User } from '@supabase/supabase-js'
 import { AuthPage, LoadingScreen, Dashboard } from './components'
-import socket from './utils/socket'
 
 function App() {
   const [user, setUser] = useState<User | null>(null)
@@ -21,7 +20,7 @@ function App() {
     })
     // TODO: Arreglar errores de TypeScript
     // Escuchar cambios de autenticación
-    const unsubscribe = onAuthStateChange((event, session) => {
+    const unsubscribe = onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null)
     })
 

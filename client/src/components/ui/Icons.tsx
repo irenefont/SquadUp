@@ -257,6 +257,26 @@ export function AlertCircleIcon({ size = iconSize, className = '', ...props }: I
   )
 }
 
+export function CheckCircleIcon({ size = iconSize, className = '', ...props }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      {...props}
+    >
+      <circle cx="12" cy="12" r="10" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
+  )
+}
+
 export function ChatIcon({ size = iconSize, className = '', ...props }: IconProps) {
   return (
     <svg
@@ -347,8 +367,86 @@ export function LoaderIcon({ size = iconSize, className = '', ...props }: IconPr
   )
 }
 
-// Logo de Squad Up (grupo de usuarios)
+// Logo de Squad Up - Escudo con escuadrón uniéndose
 export function SquadUpLogo({ size = 64, className = '', ...props }: IconProps) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 64 64"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      {...props}
+    >
+      {/* Escudo exterior con gradiente implícito por capas */}
+      <path
+        d="M32 4L8 14V30C8 44 18.5 54.5 32 60C45.5 54.5 56 44 56 30V14L32 4Z"
+        fill="currentColor"
+        opacity="0.15"
+      />
+      <path
+        d="M32 8L12 16.5V30C12 42 21 51 32 56C43 51 52 42 52 30V16.5L32 8Z"
+        fill="currentColor"
+        opacity="0.25"
+      />
+      <path
+        d="M32 12L16 19V30C16 40 23.5 47.5 32 52C40.5 47.5 48 40 48 30V19L32 12Z"
+        fill="currentColor"
+        opacity="0.4"
+      />
+
+      {/* Figuras del escuadrón - tres jugadores uniéndose */}
+      {/* Jugador central (más grande, adelante) */}
+      <circle cx="32" cy="26" r="5" fill="currentColor" />
+      <path
+        d="M32 32C27 32 23 36 23 41V44H41V41C41 36 37 32 32 32Z"
+        fill="currentColor"
+      />
+
+      {/* Jugador izquierdo */}
+      <circle cx="20" cy="30" r="4" fill="currentColor" opacity="0.7" />
+      <path
+        d="M20 35C16 35 13 38 13 42V44H23V42C23 40.5 22 39 20.5 38.5"
+        fill="currentColor"
+        opacity="0.7"
+      />
+
+      {/* Jugador derecho */}
+      <circle cx="44" cy="30" r="4" fill="currentColor" opacity="0.7" />
+      <path
+        d="M44 35C48 35 51 38 51 42V44H41V42C41 40.5 42 39 43.5 38.5"
+        fill="currentColor"
+        opacity="0.7"
+      />
+
+      {/* Líneas de conexión entre jugadores */}
+      <path
+        d="M24 28L27 27"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        opacity="0.6"
+      />
+      <path
+        d="M40 28L37 27"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        opacity="0.6"
+      />
+
+      {/* Estrella decorativa en la punta del escudo */}
+      <path
+        d="M32 16L33 19H36L33.5 21L34.5 24L32 22L29.5 24L30.5 21L28 19H31L32 16Z"
+        fill="currentColor"
+        opacity="0.8"
+      />
+    </svg>
+  )
+}
+
+export function XIcon({ size = 24, className = '' }: { size?: number; className?: string }) {
   return (
     <svg
       width={size}
@@ -356,16 +454,13 @@ export function SquadUpLogo({ size = 64, className = '', ...props }: IconProps) 
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth={1.5}
+      strokeWidth={2}
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
-      {...props}
     >
-      <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-      <circle cx="9" cy="7" r="4" />
-      <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
     </svg>
   )
 }

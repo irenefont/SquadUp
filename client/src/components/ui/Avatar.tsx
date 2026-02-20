@@ -11,6 +11,7 @@ interface AvatarProps {
   initials?: string
   size?: AvatarSize
   style?: React.CSSProperties
+  className?: string
   onClick?: () => void
 }
 
@@ -27,6 +28,7 @@ export function Avatar({
   initials,
   size = 'md',
   style,
+  className = '',
   onClick,
 }: AvatarProps) {
   const dimension = sizes[size]
@@ -48,6 +50,7 @@ export function Avatar({
         fontSize: dimension * 0.4,
         ...style,
       }}
+      className={className}
       title={alt}
     >
       {src ? (

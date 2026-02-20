@@ -10,8 +10,8 @@ import type { User, Session } from '@supabase/supabase-js'
 export interface AuthResponse {
   success: boolean
   error?: string
-  user?: User
-  session?: Session
+  user?: User | null
+  session?: Session | null
 }
 
 // Listener para cambios de estado
@@ -21,7 +21,7 @@ type AuthStateCallback = (event: string, session: Session | null) => void
  * Iniciar sesión con Google OAuth
  */
 export async function signInWithGoogle(): Promise<AuthResponse> {
-  const { data, error } = await supabase.auth.signInWithOAuth({
+  const { error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
       redirectTo: window.location.origin + '/dashboard'
