@@ -14,9 +14,11 @@ import {
   createRoom,
   joinRoom,
   leaveRoom,
+  deleteRoom,
   subscribeToRooms,
   type RoomWithData
 } from '../../services/room.service'
+import { getGames, type GameWithDetails } from '../../services/game.service'
 import type { CreateRoomData } from '../rooms/CreateRoomModal'
 
 interface DashboardProps {
@@ -31,35 +33,56 @@ export function Dashboard({ user, onLogout }: DashboardProps) {
   const [selectedRoom, setSelectedRoom] = useState<RoomWithData | null>(null)
   const [isCreateRoomModalOpen, setIsCreateRoomModalOpen] = useState(false)
   const [rooms, setRooms] = useState<RoomWithData[]>([])
+  const [games, setGames] = useState<GameWithDetails[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [isJoining, setIsJoining] = useState(false)
   const [isLeaving, setIsLeaving] = useState(false)
+  const [isDeleting, setIsDeleting] = useState(false)
+  const [selectedGameId, setSelectedGameId] = useState<string | null>(null)
+
+  // Obtener el nombre del juego seleccionado desde los datos de la BD
+  const selectedGameName = selectedGameId
+    ? games.find(g => g.id === selectedGameId)?.name || null
+    : null
+
+  // Filtrar salas según el juego seleccionado (usando UUID directamente)
+  const filteredRooms = selectedGameId
+    ? rooms.filter(room => room.game_id === selectedGameId)
+    : rooms
+
+  // Cargar juegos desde la base de datos
+  const loadGames = useCallback(async () => {
+    const fetchedGames = await getGames()
+    setGames(fetchedGames)
+  }, [])
 
   // Cargar salas al montar el componente
   const loadRooms = useCallback(async () => {
     setIsLoading(true)
     const fetchedRooms = await getRooms({ status: 'active' })
     setRooms(fetchedRooms)
+    setIsLoading(false)
+  }, [])
 
-    // Si hay una sala seleccionada, actualizar sus datos
+  // Actualizar sala seleccionada cuando cambian las salas
+  useEffect(() => {
     if (selectedRoom) {
-      const updatedRoom = fetchedRooms.find(r => r.id === selectedRoom.id)
+      const updatedRoom = rooms.find(r => r.id === selectedRoom.id)
       if (updatedRoom) {
         setSelectedRoom(updatedRoom)
-      } else {
+      } else if (rooms.length > 0) {
         // La sala ya no existe, volver a la lista
         setCurrentView('list')
         setSelectedRoom(null)
       }
     }
+  }, [rooms, selectedRoom?.id])
 
-    setIsLoading(false)
-  }, [selectedRoom])
-
-  // Cargar salas al inicio
+  // Cargar juegos y salas al inicio
   useEffect(() => {
+    loadGames()
     loadRooms()
-  }, [])
+  }, [loadGames, loadRooms])
 
   // Suscribirse a cambios en tiempo real
   useEffect(() => {
@@ -83,23 +106,10 @@ export function Dashboard({ user, onLogout }: DashboardProps) {
   }
 
   const handleCreateRoom = async (roomData: CreateRoomData) => {
-    // Mapear el ID del juego (desde mockData: 'lol', 'valorant', etc.) al UUID de la base de datos
-    const gameMap: Record<string, string> = {
-      'lol': 'd5432591-2266-4b5e-ba86-aa3943f671df',           // League of Legends
-      'valorant': 'f3a9286d-4bac-4e6b-9ff5-5f8ea58c1b1f',      // Valorant
-      'wow': '12921437-d08a-496b-ab7c-f7b07bab49e8',           // World of Warcraft
-      'apex': '00a8f02f-10c8-4571-a7c3-9e817701ec3b',          // Apex Legends
-    }
-
-    const gameId = gameMap[roomData.game]
-    if (!gameId) {
-      alert('Juego no válido')
-      return
-    }
-
+    // roomData.gameId ya es el UUID de la base de datos
     const newRoom = await createRoom({
       title: roomData.title,
-      game_id: gameId,
+      game_id: roomData.gameId,
       description: roomData.description,
       max_participants: roomData.maxPlayers,
       rank_required: roomData.rank === 'Sin rango' ? undefined : roomData.rank,
@@ -169,6 +179,25 @@ export function Dashboard({ user, onLogout }: DashboardProps) {
     }
   }
 
+  // Eliminar/disolver una sala (solo host)
+  const handleDeleteRoom = async (room: RoomWithData) => {
+    setIsDeleting(true)
+
+    const result = await deleteRoom(room.id, user.id)
+
+    setIsDeleting(false)
+
+    if (result.success) {
+      // Volver a la lista
+      setSelectedRoom(null)
+      setCurrentView('list')
+      // Recargar las salas
+      loadRooms()
+    } else {
+      alert(result.error || 'Error al eliminar la sala')
+    }
+  }
+
   // Verificar si el usuario está unido a la sala actual
   const isUserInRoom = selectedRoom?.players.some((p) => p.user_id === user.id) ?? false
   const isUserHost = selectedRoom?.players.find((p) => p.user_id === user.id)?.isHost ?? false
@@ -192,9 +221,9 @@ export function Dashboard({ user, onLogout }: DashboardProps) {
   } : null
 
   return (
-    <div className="min-h-screen bg-[#121218] flex flex-col">
+    <div className="h-screen bg-[#121218] flex flex-col overflow-hidden">
       {/* NAVBAR */}
-      <div className="px-4 pt-4">
+      <div className="px-3 pt-3 shrink-0">
         <Navbar
           user={user}
           onLogout={onLogout}
@@ -203,20 +232,28 @@ export function Dashboard({ user, onLogout }: DashboardProps) {
       </div>
 
       {/* CONTENEDOR PRINCIPAL */}
-      <div className="flex flex-1 gap-3 p-4 items-stretch">
-        {/* SIDEBAR - Juegos - 250px */}
-        <aside className="w-64 shrink-0 hidden md:flex">
-          <GameSidebar />
+      <div className="flex flex-1 gap-2 p-3 items-stretch min-h-0">
+        {/* SIDEBAR - Juegos */}
+        <aside className="w-52 shrink-0 hidden md:flex">
+          <GameSidebar
+            games={games}
+            selectedGameId={selectedGameId}
+            onGameSelect={setSelectedGameId}
+          />
         </aside>
 
         {/* CONTENIDO PRINCIPAL */}
-        <main className="flex-1 min-w-0 flex flex-col">
+        <main className="flex-1 min-w-0 flex flex-col min-h-0">
           {isLoading ? (
             <div className="flex items-center justify-center h-full">
               <div className="text-[#b2bec3]">Cargando salas...</div>
             </div>
           ) : currentView === 'list' ? (
-            <RoomsList rooms={rooms} onSelectRoom={handleSelectRoom} />
+            <RoomsList
+              rooms={filteredRooms}
+              onSelectRoom={handleSelectRoom}
+              selectedGameName={selectedGameName}
+            />
           ) : (
             selectedRoom && adaptedRoom && (
               <RoomView
@@ -227,8 +264,10 @@ export function Dashboard({ user, onLogout }: DashboardProps) {
                 isUserHost={isUserHost}
                 onJoinRoom={() => handleJoinRoom(selectedRoom)}
                 onLeaveRoom={() => handleLeaveRoom(selectedRoom)}
+                onDeleteRoom={() => handleDeleteRoom(selectedRoom)}
                 isJoining={isJoining}
                 isLeaving={isLeaving}
+                isDeleting={isDeleting}
               >
                 {/* Chat con persistencia - solo si está unido */}
                 {isUserInRoom && (
@@ -242,9 +281,9 @@ export function Dashboard({ user, onLogout }: DashboardProps) {
           )}
         </main>
 
-        {/* PANEL DE CHAT GLOBAL - 264px - solo visible en lista */}
+        {/* PANEL DE CHAT GLOBAL - solo visible en lista */}
         {currentView === 'list' && (
-          <aside className="w-64 shrink-0 hidden xl:flex">
+          <aside className="w-56 shrink-0 hidden xl:flex">
             <ChatPanel user={user} />
           </aside>
         )}
@@ -255,6 +294,7 @@ export function Dashboard({ user, onLogout }: DashboardProps) {
         isOpen={isCreateRoomModalOpen}
         onClose={() => setIsCreateRoomModalOpen(false)}
         onSubmit={handleCreateRoom}
+        games={games}
       />
     </div>
   )

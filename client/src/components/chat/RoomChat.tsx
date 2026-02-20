@@ -192,7 +192,7 @@ export function RoomChatWithPersistence({ roomId, user }: RoomChatProps) {
                       </span>
                     </div>
                     <span
-                      className={`text-white text-sm px-3 py-2 rounded-xl max-w-[80%] break-words ${
+                      className={`text-white text-sm px-3 py-2 rounded-xl max-w-[80%] wrap-break-words ${
                         isOwn
                           ? 'bg-[#6c5ce7] rounded-br-sm'
                           : 'bg-[#2d2d3a] rounded-bl-sm'

@@ -159,7 +159,7 @@ export function ChatPanel({ user }: ChatPanelProps) {
         height: '100%',
         width: '100%',
         backgroundColor: '#1e1e26',
-        borderRadius: 32,
+        borderRadius: 12,
         overflow: 'hidden',
         minHeight: 0,
       }}
@@ -167,8 +167,8 @@ export function ChatPanel({ user }: ChatPanelProps) {
       {/* Header del Chat */}
       <div
         style={{
-          padding: 24,
-          borderBottom: '1px solid #5c5a5a',
+          padding: '12px 16px',
+          borderBottom: '1px solid #2d2d3a',
           flexShrink: 0,
         }}
       >
@@ -176,12 +176,12 @@ export function ChatPanel({ user }: ChatPanelProps) {
           style={{
             color: '#b2bec3',
             fontFamily: 'Inter, sans-serif',
-            fontWeight: 700,
-            fontSize: 24,
+            fontWeight: 600,
+            fontSize: 14,
             margin: 0,
           }}
         >
-          Chat
+          Chat Global
         </h3>
       </div>
 
@@ -190,10 +190,10 @@ export function ChatPanel({ user }: ChatPanelProps) {
         style={{
           flex: 1,
           overflowY: 'auto',
-          padding: 16,
+          padding: 12,
           display: 'flex',
           flexDirection: 'column',
-          gap: 8,
+          gap: 6,
           minHeight: 0,
         }}
       >
@@ -205,7 +205,7 @@ export function ChatPanel({ user }: ChatPanelProps) {
               alignItems: 'center',
               justifyContent: 'center',
               color: '#636e72',
-              fontSize: 14,
+              fontSize: 12,
               textAlign: 'center',
             }}
           >
@@ -220,14 +220,14 @@ export function ChatPanel({ user }: ChatPanelProps) {
                 style={{
                   display: 'flex',
                   flexDirection: 'column',
-                  gap: 4,
+                  gap: 2,
                   alignItems: isOwn ? 'flex-end' : 'flex-start',
                 }}
               >
                 <span
                   style={{
                     color: isOwn ? '#a29bfe' : '#6c5ce7',
-                    fontSize: 11,
+                    fontSize: 10,
                     fontWeight: 600,
                     marginRight: isOwn ? 4 : 0,
                     marginLeft: isOwn ? 0 : 4,
@@ -238,13 +238,13 @@ export function ChatPanel({ user }: ChatPanelProps) {
                 <span
                   style={{
                     color: '#ffffff',
-                    fontSize: 14,
-                    padding: '8px 12px',
+                    fontSize: 12,
+                    padding: '6px 10px',
                     backgroundColor: isOwn ? '#6c5ce7' : '#2d2d3a',
-                    borderRadius: 12,
-                    borderBottomRightRadius: isOwn ? 4 : 12,
-                    borderBottomLeftRadius: isOwn ? 12 : 4,
-                    maxWidth: '80%',
+                    borderRadius: 8,
+                    borderBottomRightRadius: isOwn ? 2 : 8,
+                    borderBottomLeftRadius: isOwn ? 8 : 2,
+                    maxWidth: '85%',
                     wordBreak: 'break-word',
                   }}
                 >
@@ -260,10 +260,10 @@ export function ChatPanel({ user }: ChatPanelProps) {
       {/* Input para enviar */}
       <div
         style={{
-          padding: 16,
-          borderTop: '1px solid #5c5a5a',
+          padding: 10,
+          borderTop: '1px solid #2d2d3a',
           display: 'flex',
-          gap: 8,
+          gap: 6,
           flexShrink: 0,
           minWidth: 0,
         }}
@@ -276,12 +276,12 @@ export function ChatPanel({ user }: ChatPanelProps) {
           placeholder="Escribe un mensaje..."
           style={{
             flex: 1,
-            padding: '12px 16px',
+            padding: '8px 12px',
             backgroundColor: '#121218',
             border: 'none',
-            borderRadius: 8,
+            borderRadius: 6,
             color: '#ffffff',
-            fontSize: 14,
+            fontSize: 12,
             outline: 'none',
             minWidth: 0,
           }}
@@ -290,12 +290,12 @@ export function ChatPanel({ user }: ChatPanelProps) {
           onClick={handleSendMessage}
           disabled={!inputValue.trim()}
           style={{
-            padding: '12px 16px',
+            padding: '8px 12px',
             backgroundColor: '#6c5ce7',
             color: '#ffffff',
             border: 'none',
-            borderRadius: 8,
-            fontSize: 14,
+            borderRadius: 6,
+            fontSize: 12,
             fontWeight: 600,
             cursor: inputValue.trim() ? 'pointer' : 'not-allowed',
             opacity: inputValue.trim() ? 1 : 0.5,

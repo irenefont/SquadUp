@@ -36,8 +36,10 @@ interface RoomViewProps {
   isUserHost: boolean
   onJoinRoom: () => void
   onLeaveRoom: () => void
+  onDeleteRoom: () => void
   isJoining?: boolean
   isLeaving?: boolean
+  isDeleting?: boolean
   children?: React.ReactNode
 }
 
@@ -49,8 +51,10 @@ export function RoomView({
   isUserHost,
   onJoinRoom,
   onLeaveRoom,
+  onDeleteRoom,
   isJoining = false,
   isLeaving = false,
+  isDeleting = false,
   children,
 }: RoomViewProps) {
   const gameInfo = GAMES.find((g) => g.id === room.game)
@@ -192,17 +196,33 @@ export function RoomView({
           )}
 
           {/* Botón cancelar/volver */}
-          <button
-            onClick={onBack}
-            className="flex-1 max-w-xs h-14 rounded-full font-bold text-white bg-[#ff7675] hover:bg-[#ff6b6b] cursor-pointer transition-all"
-          >
-            {isUserHost ? 'Cancelar sala' : 'Volver'}
-          </button>
+          {isUserHost ? (
+            // Host: Botón para disolver/eliminar la sala
+            <button
+              onClick={onDeleteRoom}
+              disabled={isDeleting}
+              className={`flex-1 max-w-xs h-14 rounded-full font-bold text-white transition-all ${
+                isDeleting
+                  ? 'bg-[#636e72] cursor-not-allowed'
+                  : 'bg-[#ff7675] hover:bg-[#ff6b6b] cursor-pointer'
+              }`}
+            >
+              {isDeleting ? 'Disolviendo...' : 'Disolver sala'}
+            </button>
+          ) : (
+            // No host: Botón para volver a la lista
+            <button
+              onClick={onBack}
+              className="flex-1 max-w-xs h-14 rounded-full font-bold text-white bg-[#ff7675] hover:bg-[#ff6b6b] cursor-pointer transition-all"
+            >
+              Volver
+            </button>
+          )}
         </div>
       </div>
 
       {/* ============ MITAD INFERIOR: CHAT DE SALA ============ */}
-      <div className="h-[280px] border-t border-[#2d2d3a]">
+      <div className="h-70 border-t border-[#2d2d3a]">
         {isUserInRoom ? (
           children || (
             <div className="h-full flex items-center justify-center">
