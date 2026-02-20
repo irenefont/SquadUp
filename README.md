@@ -1,8 +1,45 @@
 # SquadUp
 
+<p align="center">
+  <strong>Encuentra tu equipo perfecto</strong>
+</p>
+
 SquadUp es una aplicación web full-stack para la gestión y organización de eventos colaborativos. El proyecto implementa una arquitectura de monorepo que integra el frontend y el backend en un único repositorio, facilitando el desarrollo y despliegue coordinado de ambas partes.
 
 Este proyecto forma parte del Proyecto Intermodular del Grado Superior en Desarrollo de Aplicaciones Multiplataforma (DAM).
+
+## Funcionalidades
+
+- **Autenticación completa**: Registro y login con email/contraseña y Google OAuth
+- **Gestión de salas**: Crear, unirse, salir y eliminar salas de juego
+- **Filtrado por juego**: Buscar salas por juego específico
+- **Chat en tiempo real**: Mensajería global y por sala
+- **Sistema de valoración**: Valoración de 5 estrellas post-partida
+- **Perfiles de usuario**: Personalización de perfil con preferencias de juego
+
+## Arquitectura
+
+```
+SquadUp/
+├── client/                 # Frontend React + TypeScript
+│   ├── src/
+│   │   ├── components/    # Componentes React
+│   │   │   ├── ui/        # Componentes UI reutilizables
+│   │   │   ├── layout/    # Componentes de layout
+│   │   │   ├── forms/     # Componentes de formularios
+│   │   │   ├── rooms/     # Componentes de salas
+│   │   │   ├── chat/      # Componentes de chat
+│   │   │   └── common/    # Componentes comunes
+│   │   ├── services/      # Servicios (API calls)
+│   │   ├── utils/         # Utilidades y helpers
+│   │   ├── types/         # Tipos TypeScript
+│   │   ├── constants/     # Constantes de la app
+│   │   └── data/          # Datos de ejemplo
+│   └── ...
+├── server/                # Backend Node.js + Express
+│   └── index.ts          # Servidor Socket.io
+└── README.md
+```
 
 ## Aviso de licencia
 
@@ -114,20 +151,25 @@ SquadUp/
 ## Tecnologías
 
 ### Frontend
-
-- React 19.2.0: Biblioteca para la construcción de interfaces de usuario
-- TypeScript 5.9: Superset tipado de JavaScript
-- Vite 7.3.1: Herramienta de construcción y servidor de desarrollo
-- Tailwind CSS 4.1.18: Framework CSS utility-first
-- ESLint 9.39.1: Herramienta de análisis estático de código
+- **React 19.2.0**: Biblioteca para construcción de interfaces
+- **TypeScript 5.9**: Superset tipado de JavaScript
+- **Vite 7.3.1**: Herramienta de build y desarrollo
+- **Tailwind CSS 4.1.18**: Framework CSS utility-first
+- **Supabase JS 2.96.0**: Cliente para Supabase
+- **Socket.io-client 4.8.3**: Comunicación en tiempo real
 
 ### Backend
+- **Express 5.2.1**: Framework web para Node.js
+- **TypeScript 5.9**: Superset tipado de JavaScript
+- **Socket.io 4.8.3**: WebSockets para tiempo real
+- **CORS 2.8.6**: Middleware CORS
+- **Morgan 1.10.1**: Logger HTTP
 
-- Express 5.2.1: Framework web para Node.js
-- TypeScript 5.9: Superset tipado de JavaScript
-- Socket.io 4.8.3: Biblioteca para comunicación en tiempo real
-- CORS 2.8.6: Middleware para el manejo de Cross-Origin Resource Sharing
-- Dotenv 17.3.1: Módulo para la carga de variables de entorno
+### Backend as a Service (Supabase)
+- **Autenticación**: Email/contraseña + Google OAuth
+- **Base de datos**: PostgreSQL con Row Level Security
+- **Realtime**: Suscripciones en tiempo real
+- **Storage**: Almacenamiento de archivos
 
 ### Herramientas de desarrollo
 

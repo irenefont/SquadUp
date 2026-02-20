@@ -1,6 +1,20 @@
 /**
  * SQUAD UP - Componente Navbar
- * Barra de navegación principal - Fiel al Figma
+ * ==============================
+ *
+ * Barra de navegación principal de la aplicación.
+ * Contiene logo, buscador, botón de crear sala, notificaciones y avatar.
+ *
+ * ELEMENTOS:
+ * - Logo de Squad Up
+ * - Barra de búsqueda (placeholder)
+ * - Botón "Crear sala"
+ * - Icono de notificaciones
+ * - Avatar del usuario
+ * - Botón de logout
+ *
+ * @module components/layout/Navbar
+ * @author Squad Up Team
  */
 
 import { SearchIcon, BellIcon, LogOutIcon, SquadUpLogo, PlusIcon } from '../ui/Icons'
@@ -8,8 +22,11 @@ import { Avatar } from '../ui/Avatar'
 import type { User } from '@supabase/supabase-js'
 
 interface NavbarProps {
+  /** Usuario autenticado actual */
   user: User
+  /** Callback para cerrar sesión */
   onLogout: () => void
+  /** Callback para abrir modal de crear sala */
   onCreateRoom: () => void
 }
 

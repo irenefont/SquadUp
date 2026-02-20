@@ -1,13 +1,28 @@
 /**
- * Squad Up - Definición de Rutas y Endpoints
+ * SQUAD UP - Definición de Rutas y Endpoints
+ * ==============================
  *
- * Este archivo centraliza todas las rutas del frontend.
- * Arquitectura: MVC (Model-View-Controller)
+ * Este archivo centraliza todas las rutas del frontend y los endpoints
+ * de la API. Facilita el mantenimiento y evita strings mágicos.
+ *
+ * CATEGORÍAS:
+ * - ROUTES: Rutas del frontend (React Router)
+ * - API_ENDPOINTS: Endpoints del backend
+ *
+ * ARQUITECTURA: MVC (Model-View-Controller)
+ *
+ * @module routes
+ * @author Squad Up Team
  */
 
 // ============================================
 // RUTAS DEL FRONTEND (React Router)
 // ============================================
+
+/**
+ * Rutas de la aplicación frontend
+ * Usadas con React Router para navegación
+ */
 export const ROUTES = {
   // Rutas públicas
   HOME: '/',
@@ -39,6 +54,11 @@ export const ROUTES = {
 // ============================================
 // ENDPOINTS DE LA API (Backend)
 // ============================================
+
+/**
+ * Endpoints de la API del backend
+ * Funciones factory para generar URLs dinámicas
+ */
 export const API_ENDPOINTS = {
   // Autenticación
   AUTH: {
@@ -96,24 +116,34 @@ export const API_ENDPOINTS = {
 
 /**
  * Genera la ruta detallada de una sala con el ID
+ * @param roomId - ID de la sala
+ * @returns Ruta completa (ej: '/rooms/abc-123')
  */
 export const getRoomRoute = (roomId: string): string =>
   ROUTES.ROOM_DETAIL.replace(':roomId', roomId)
 
 /**
  * Genera la ruta del chat de una sala
+ * @param roomId - ID de la sala
+ * @returns Ruta del chat (ej: '/rooms/abc-123/chat')
  */
 export const getRoomChatRoute = (roomId: string): string =>
   ROUTES.ROOM_CHAT.replace(':roomId', roomId)
 
 /**
  * Genera la ruta de valoraciones de un usuario
+ * @param userId - ID del usuario
+ * @returns Ruta de valoraciones (ej: '/ratings/abc-123')
  */
 export const getUserRatingsRoute = (userId: string): string =>
   ROUTES.USER_RATINGS.replace(':userId', userId)
 
 /**
  * Verifica si una ruta requiere autenticación
+ * Útil para proteger rutas y redirigir a login si es necesario
+ *
+ * @param path - Ruta a verificar
+ * @returns true si requiere autenticación, false si es pública
  */
 export const isProtectedRoute = (path: string): boolean => {
   const protectedRoutes = [

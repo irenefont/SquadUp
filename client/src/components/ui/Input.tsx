@@ -1,13 +1,27 @@
 /**
  * SQUAD UP - Componente Input
- * Campo de entrada con soporte para iconos
+ * ==============================
+ *
+ * Campo de entrada de texto con soporte para iconos.
+ * Permite iconos a la izquierda y/o derecha del input.
+ *
+ * CARACTERÍSTICAS:
+ * - Icono izquierdo (decorativo)
+ * - Icono derecho (puede ser clickeable, ej: mostrar/ocultar contraseña)
+ * - Hereda todos los atributos de input HTML
+ *
+ * @module components/ui/Input
+ * @author Squad Up Team
  */
 
 import type { InputHTMLAttributes, ReactNode } from 'react'
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  /** Icono a mostrar a la izquierda */
   icon?: ReactNode
+  /** Icono a mostrar a la derecha */
   rightIcon?: ReactNode
+  /** Callback cuando se hace click en el icono derecho */
   onRightIconClick?: () => void
 }
 

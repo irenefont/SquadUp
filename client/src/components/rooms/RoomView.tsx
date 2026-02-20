@@ -1,14 +1,32 @@
 /**
  * SQUAD UP - Componente RoomView
- * Vista detallada de una sala de juego - Basado en Figma
- * Mitad superior: detalles y jugadores
- * Mitad inferior: chat de sala (pasado como children)
+ * ==============================
+ *
+ * Vista detallada de una sala de juego.
+ * Diseño basado en el Figma oficial con dos secciones:
+ * - Mitad superior: Detalles de la sala y jugadores
+ * - Mitad inferior: Chat de la sala
+ *
+ * FUNCIONALIDADES:
+ * - Ver información de la sala (juego, rango, roles, descripción)
+ * - Ver lista de jugadores con slots vacíos
+ * - Unirse a la sala (si no está unido)
+ * - Salir de la sala (si está unido, no host)
+ * - Disolver sala (solo host)
+ * - Iniciar partida (solo host)
+ * - Chat en tiempo real (solo si está unido)
+ *
+ * @module components/rooms/RoomView
+ * @author Squad Up Team
  */
 
 import type { User } from '@supabase/supabase-js'
 import { GAMES } from '../../data/mockData'
 
-// Tipo local para compatibilidad con el componente
+/**
+ * Tipo local para compatibilidad con el componente
+ * Combina datos de RoomWithData con formato legacy
+ */
 interface LocalRoomWithPlayers {
   id: string
   title: string

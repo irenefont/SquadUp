@@ -1,7 +1,23 @@
 /**
  * SQUAD UP - Componente RoomChat con Persistencia
- * Chat específico de una sala con persistencia en Supabase
- * Combina Socket.io para tiempo real + Supabase para persistencia
+ * ==============================
+ *
+ * Chat específico de una sala de juego con persistencia en Supabase.
+ * Combina Socket.io para tiempo real + Supabase para almacenamiento.
+ *
+ * DIFERENCIA CON ChatPanel:
+ * - ChatPanel: Chat global sin persistencia
+ * - RoomChat: Chat de sala con historial guardado
+ *
+ * FLUJO DE DATOS:
+ * 1. Cargar historial desde Supabase
+ * 2. Suscribirse a nuevos mensajes (Supabase Realtime)
+ * 3. También escuchar Socket.io para compatibilidad
+ * 4. Enviar mensajes a Supabase (persistencia)
+ * 5. Reenviar por Socket.io (clientes legacy)
+ *
+ * @module components/chat/RoomChat
+ * @author Squad Up Team
  */
 
 import { useState, useEffect, useRef } from 'react'
@@ -15,7 +31,9 @@ import {
 } from '../../services/chat.service'
 
 interface RoomChatProps {
+  /** ID de la sala */
   roomId: string
+  /** Usuario autenticado actual */
   user: User
 }
 

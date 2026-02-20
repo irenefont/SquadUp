@@ -1,6 +1,25 @@
 /**
  * SQUAD UP - Componente CreateRoomModal
- * Modal para crear una nueva sala de juego
+ * ==============================
+ *
+ * Modal para crear una nueva sala de juego.
+ * Formulario con validación y selección de juego visual.
+ *
+ * CAMPOS DEL FORMULARIO:
+ * - Título de la sala (obligatorio)
+ * - Juego (obligatorio, selección visual)
+ * - Descripción (opcional)
+ * - Rango mínimo (opcional)
+ * - Máximo de jugadores (2-5)
+ * - Roles buscados (opcional, múltiple)
+ *
+ * VALIDACIONES:
+ * - Título obligatorio
+ * - Juego obligatorio
+ * - Máximo jugadores entre 2 y 5
+ *
+ * @module components/rooms/CreateRoomModal
+ * @author Squad Up Team
  */
 
 import { useState } from 'react'
@@ -8,7 +27,7 @@ import { XIcon, GamepadIcon, UsersIcon } from '../ui/Icons'
 import { RANKS, ROLES } from '../../data/mockData'
 import { type GameWithDetails } from '../../services/game.service'
 
-// Mapa de slug a imagen local
+/** Mapa de slug a imágenes locales de juegos */
 const GAME_IMAGES: Record<string, string> = {
   'league-of-legends': '/lol_logo.png',
   'valorant': '/valorant_logo.png',
@@ -17,18 +36,29 @@ const GAME_IMAGES: Record<string, string> = {
 }
 
 interface CreateRoomModalProps {
+  /** Si el modal está visible */
   isOpen: boolean
+  /** Callback para cerrar el modal */
   onClose: () => void
+  /** Callback cuando se envía el formulario */
   onSubmit: (roomData: CreateRoomData) => void
+  /** Lista de juegos disponibles */
   games: GameWithDetails[]
 }
 
+/** Datos del formulario de creación de sala */
 export interface CreateRoomData {
+  /** Título de la sala */
   title: string
+  /** ID del juego seleccionado */
   gameId: string
+  /** Descripción opcional */
   description: string
+  /** Máximo de jugadores */
   maxPlayers: number
+  /** Rango mínimo requerido */
   rank: string
+  /** Roles buscados */
   roles: string[]
 }
 

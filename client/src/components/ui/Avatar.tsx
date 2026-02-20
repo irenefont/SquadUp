@@ -1,20 +1,46 @@
 /**
  * SQUAD UP - Componente Avatar
- * Avatar de usuario con diferentes tamaños
+ * ==============================
+ *
+ * Avatar de usuario con múltiples tamaños.
+ * Muestra imagen, iniciales o icono por defecto.
+ *
+ * VARIANTES:
+ * - Con imagen: Muestra la imagen proporcionada
+ * - Con iniciales: Muestra las iniciales sobre fondo
+ * - Por defecto: Muestra icono de usuario
+ *
+ * TAMAÑOS:
+ * - sm: 32px (para listas compactas)
+ * - md: 48px (tamaño estándar)
+ * - lg: 64px (para perfiles)
+ * - xl: 75px (para vista detallada)
+ *
+ * @module components/ui/Avatar
+ * @author Squad Up Team
  */
 
+/** Tamaños disponibles para el avatar */
 type AvatarSize = 'sm' | 'md' | 'lg' | 'xl'
 
 interface AvatarProps {
+  /** URL de la imagen del avatar */
   src?: string
+  /** Texto alternativo para accesibilidad */
   alt?: string
+  /** Iniciales a mostrar si no hay imagen */
   initials?: string
+  /** Tamaño del avatar */
   size?: AvatarSize
+  /** Estilos personalizados */
   style?: React.CSSProperties
+  /** Clases CSS adicionales */
   className?: string
+  /** Callback al hacer click */
   onClick?: () => void
 }
 
+/** Dimensiones en píxeles para cada tamaño */
 const sizes: Record<AvatarSize, number> = {
   sm: 32,
   md: 48,

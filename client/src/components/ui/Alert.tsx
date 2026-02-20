@@ -1,14 +1,34 @@
 /**
  * SQUAD UP - Componentes de Alerta
- * Mensajes de error y éxito reutilizables
+ * ==============================
+ *
+ * Componentes para mostrar mensajes de feedback al usuario.
+ * Disponibles en dos variantes: error (rojo) y success (verde).
+ *
+ * USO:
+ * - ErrorAlert: Para mostrar errores de formularios, API, etc.
+ * - SuccessAlert: Para confirmar acciones exitosas
+ *
+ * @module components/ui/Alert
+ * @author Squad Up Team
  */
 
 import { AlertCircleIcon, CheckCircleIcon } from './Icons'
 
 interface AlertProps {
+  /** Contenido del mensaje */
   children: React.ReactNode
 }
 
+/**
+ * Alerta de error
+ * Muestra mensajes de error con icono y fondo rojo
+ *
+ * @example
+ * ```tsx
+ * {error && <ErrorAlert>{error}</ErrorAlert>}
+ * ```
+ */
 export function ErrorAlert({ children }: AlertProps) {
   return (
     <div
@@ -30,6 +50,15 @@ export function ErrorAlert({ children }: AlertProps) {
   )
 }
 
+/**
+ * Alerta de éxito
+ * Muestra mensajes de confirmación con icono y fondo verde
+ *
+ * @example
+ * ```tsx
+ * {success && <SuccessAlert>{success}</SuccessAlert>}
+ * ```
+ */
 export function SuccessAlert({ children }: AlertProps) {
   return (
     <div

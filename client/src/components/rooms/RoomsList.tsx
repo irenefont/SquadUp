@@ -1,6 +1,16 @@
 /**
  * SQUAD UP - Componente RoomsList
- * Lista de salas disponibles - Fiel al Figma
+ * ==============================
+ *
+ * Lista de salas disponibles con scroll y estado vacío.
+ * Muestra las salas filtradas por juego seleccionado.
+ *
+ * ESTADOS:
+ * - Con salas: Muestra lista de RoomCard
+ * - Sin salas: Muestra mensaje y CTA para crear
+ *
+ * @module components/rooms/RoomsList
+ * @author Squad Up Team
  */
 
 import { RoomCard } from './RoomCard'
@@ -8,8 +18,11 @@ import { GamepadIcon } from '../ui/Icons'
 import type { RoomWithData } from '../../services/room.service'
 
 interface RoomsListProps {
+  /** Lista de salas a mostrar */
   rooms: RoomWithData[]
+  /** Callback cuando se selecciona una sala */
   onSelectRoom?: (room: RoomWithData) => void
+  /** Nombre del juego seleccionado (para mensaje vacío) */
   selectedGameName?: string | null
 }
 

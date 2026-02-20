@@ -1,13 +1,29 @@
 /**
  * SQUAD UP - Componente RoomCard
- * Tarjeta individual de sala de juego
+ * ==============================
+ *
+ * Tarjeta individual que muestra información de una sala de juego.
+ * Diseño fiel al Figma con borde izquierdo y avatar del host.
+ *
+ * INFORMACIÓN MOSTRADA:
+ * - Avatar del creador
+ * - Título de la sala
+ * - Juego (con icono)
+ * - Rango requerido (si aplica)
+ * - Cantidad de jugadores
+ * - Roles buscados (si aplica)
+ *
+ * @module components/rooms/RoomCard
+ * @author Squad Up Team
  */
 
 import { UsersIcon } from '../ui/Icons'
 import type { RoomWithData } from '../../services/room.service'
 
 interface RoomCardProps {
+  /** Datos de la sala a mostrar */
   room: RoomWithData
+  /** Callback cuando se hace click en la tarjeta */
   onClick?: (room: RoomWithData) => void
 }
 

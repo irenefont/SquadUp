@@ -1,6 +1,24 @@
 /**
  * SQUAD UP - Página de Autenticación
- * Diseño minimalista y limpio con consistencia de design tokens
+ * ==============================
+ *
+ * Página de login/registro con diseño minimalista.
+ * Soporta email/contraseña y Google OAuth.
+ *
+ * FLUJO DE AUTENTICACIÓN:
+ * 1. Usuario ingresa credenciales o usa Google
+ * 2. Si es registro: Supabase envía email de confirmación
+ * 3. Si es login: Verifica credenciales y crea sesión
+ * 4. Si exitoso: App.tsx detecta la sesión y muestra Dashboard
+ *
+ * VALIDACIONES:
+ * - Email formato válido
+ * - Contraseña mínimo 6 caracteres
+ * - Contraseñas coinciden (registro)
+ * - Username obligatorio (registro)
+ *
+ * @module components/forms/AuthPage
+ * @author Squad Up Team
  */
 
 import { useState } from 'react'

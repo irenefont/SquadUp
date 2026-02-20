@@ -1,6 +1,29 @@
 /**
  * SQUAD UP - Componente Dashboard
- * Vista principal del dashboard con persistencia en Supabase
+ * ==============================
+ *
+ * Vista principal del dashboard después del login.
+ * Coordina todos los componentes principales de la aplicación.
+ *
+ * ESTRUCTURA:
+ * ┌─────────────────────────────────────────┐
+ * │              NAVBAR                      │
+ * ├─────────┬─────────────────┬─────────────┤
+ * │ SIDEBAR │   CONTENIDO     │  CHAT       │
+ * │ Juegos  │   PRINCIPAL     │  GLOBAL     │
+ * │         │   (Salas/Room)  │             │
+ * └─────────┴─────────────────┴─────────────┘
+ *
+ * FUNCIONALIDADES:
+ * - Listar salas con filtros por juego
+ * - Crear nuevas salas
+ * - Unirse/salir de salas
+ * - Ver detalles de sala
+ * - Chat global (Socket.io)
+ * - Chat de sala (Supabase Realtime)
+ *
+ * @module components/common/Dashboard
+ * @author Squad Up Team
  */
 
 import { useState, useEffect, useCallback } from 'react'
@@ -22,10 +45,13 @@ import { getGames, type GameWithDetails } from '../../services/game.service'
 import type { CreateRoomData } from '../rooms/CreateRoomModal'
 
 interface DashboardProps {
+  /** Usuario autenticado actual */
   user: User
+  /** Callback para cerrar sesión */
   onLogout: () => void
 }
 
+/** Tipo de vista actual */
 type View = 'list' | 'room'
 
 export function Dashboard({ user, onLogout }: DashboardProps) {

@@ -1,17 +1,33 @@
 /**
  * SQUAD UP - Componente Card
- * Contenedor con estilo de tarjeta
+ * ==============================
+ *
+ * Contenedor con estilo de tarjeta para agrupar contenido.
+ * Usado para salas, perfiles, secciones de UI, etc.
+ *
+ * CARACTERÍSTICAS:
+ * - Padding configurable
+ * - Borde izquierdo opcional (para destacar)
+ * - Efecto hover opcional
+ *
+ * @module components/ui/Card
+ * @author Squad Up Team
  */
 
 import type { HTMLAttributes, ReactNode } from 'react'
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
+  /** Contenido de la tarjeta */
   children: ReactNode
+  /** Espaciado interno */
   padding?: 'none' | 'sm' | 'md' | 'lg'
+  /** Si tiene efecto hover */
   hoverable?: boolean
+  /** Si muestra borde izquierdo de marca */
   borderLeft?: boolean
 }
 
+/** Valores de padding para cada tamaño */
 const paddings = {
   none: 0,
   sm: 'var(--space-md)',

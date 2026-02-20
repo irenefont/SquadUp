@@ -1,11 +1,26 @@
 /**
  * SQUAD UP - Componente GameSidebar
- * Barra lateral con lista de juegos - Carga desde la base de datos
+ * ==============================
+ *
+ * Barra lateral que muestra la lista de juegos disponibles.
+ * Permite filtrar las salas por juego seleccionado.
+ *
+ * FUNCIONALIDADES:
+ * - Muestra todos los juegos de la base de datos
+ * - Opción "Todos los juegos" para ver todas las salas
+ * - Indicador visual del juego seleccionado
+ * - Carga imágenes locales para mejor rendimiento
+ *
+ * @module components/layout/GameSidebar
+ * @author Squad Up Team
  */
 
 import { type GameWithDetails } from '../../services/game.service'
 
-// Mapa de slug a imagen local
+/**
+ * Mapa de slugs a rutas de imágenes locales
+ * Las imágenes están en la carpeta public/
+ */
 const GAME_IMAGES: Record<string, string> = {
   'league-of-legends': '/lol_logo.png',
   'valorant': '/valorant_logo.png',
@@ -14,8 +29,11 @@ const GAME_IMAGES: Record<string, string> = {
 }
 
 interface GameCardProps {
+  /** Datos del juego */
   game: GameWithDetails
+  /** Si está seleccionado actualmente */
   isSelected: boolean
+  /** Callback al hacer click */
   onClick: () => void
 }
 

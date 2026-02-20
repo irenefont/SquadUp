@@ -1,15 +1,55 @@
 /**
  * SQUAD UP - Iconos SVG
- * Todos los iconos usan viewBox="0 0 24 24" y heredan el tamaño del padre
- * Uso: <SearchIcon className="icon" /> o <SearchIcon className="w-6 h-6" />
+ * ==============================
+ *
+ * Biblioteca de iconos SVG personalizados para la aplicación.
+ * Todos los iconos usan viewBox="0 0 24 24" y heredan el color del padre.
+ *
+ * USO:
+ * ```tsx
+ * // Uso básico
+ * <SearchIcon />
+ *
+ * // Con tamaño personalizado
+ * <SearchIcon size={32} />
+ *
+ * // Con clase CSS
+ * <SearchIcon className="text-brand" />
+ * ```
+ *
+ * ICONOS DISPONIBLES:
+ * - SearchIcon: Búsqueda
+ * - BellIcon: Notificaciones
+ * - UsersIcon: Usuarios/equipo
+ * - LogOutIcon: Cerrar sesión
+ * - MailIcon: Email
+ * - LockIcon: Contraseña
+ * - UserIcon: Usuario
+ * - EyeIcon/EyeOffIcon: Mostrar/ocultar
+ * - ArrowRightIcon: Flecha derecha
+ * - PlusIcon: Añadir
+ * - AlertCircleIcon: Error
+ * - CheckCircleIcon: Éxito
+ * - ChatIcon: Chat
+ * - GamepadIcon: Juegos
+ * - GoogleIcon: Login con Google
+ * - LoaderIcon: Cargando
+ * - SquadUpLogo: Logo de la app
+ * - XIcon: Cerrar
+ *
+ * @module components/ui/Icons
+ * @author Squad Up Team
  */
 
 interface IconProps extends React.SVGProps<SVGSVGElement> {
+  /** Tamaño del icono en píxeles */
   size?: number
 }
 
+/** Tamaño por defecto para todos los iconos */
 const iconSize = 24
 
+/** Icono de búsqueda (lupa) */
 export function SearchIcon({ size = iconSize, className = '', ...props }: IconProps) {
   return (
     <svg
